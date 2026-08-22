@@ -289,7 +289,7 @@ export function CreateProjectModal({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <Dialog open onOpenChange={(v) => { if (!v) onClose(); }}>
+    <Dialog open disablePointerDismissal onOpenChange={(v) => { if (!v) onClose(); }}>
       <DialogContent
         showCloseButton={false}
         className={cn(

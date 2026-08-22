@@ -451,7 +451,7 @@ export function AutopilotDialog(props: AutopilotDialogProps) {
   const contentKey = isCreate ? "create" : props.autopilotId;
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} disablePointerDismissal onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
         className={cn(
@@ -459,8 +459,8 @@ export function AutopilotDialog(props: AutopilotDialogProps) {
           "!transition-all !duration-300 !ease-out !-translate-y-1/2",
           "!w-[calc(100vw-2rem)]",
           isExpanded
-            ? "!max-w-6xl !h-[calc(100vh-4rem)]"
-            : "!max-w-5xl !h-[min(720px,calc(100vh-4rem))]",
+            ? "!max-w-6xl !h-[calc(100svh-4rem)]"
+            : "!max-w-5xl !h-[min(720px,calc(100svh-4rem))]",
         )}
       >
         <DialogTitle className="sr-only">

@@ -442,15 +442,15 @@ export function CreateSkillDialog({
   const wide = method === "runtime";
 
   return (
-    <Dialog open onOpenChange={(v) => !v && onClose()}>
+    <Dialog open disablePointerDismissal onOpenChange={(v) => !v && onClose()}>
       <DialogContent
         showCloseButton={false}
         className={cn(
           "flex flex-col gap-0 overflow-hidden p-0",
           "!transition-all !duration-300 !ease-out",
           wide
-            ? "!h-[min(600px,85vh)] !max-w-2xl !w-full"
-            : "!h-auto !max-h-[85vh] !max-w-md !w-full",
+            ? "!h-[min(600px,85svh)] !max-w-2xl !w-full"
+            : "!h-auto !max-h-[85svh] !max-w-md !w-full",
         )}
       >
         {/* Header */}

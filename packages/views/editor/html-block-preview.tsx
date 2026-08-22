@@ -133,7 +133,7 @@ export function HtmlBlockPreview({ html, className }: HtmlBlockPreviewProps) {
       )}
       <Dialog open={fullscreen} onOpenChange={setFullscreen}>
         <DialogContent
-          className="!max-w-6xl !h-[min(90vh,calc(100vh-2rem))] w-full p-0 gap-0 overflow-hidden"
+          className="!max-w-6xl !h-[min(90svh,calc(100svh-2rem))] w-full p-0 gap-0 overflow-hidden"
           aria-label={t(($) => $.code_block.fullscreen)}
         >
           <HtmlPreviewBody

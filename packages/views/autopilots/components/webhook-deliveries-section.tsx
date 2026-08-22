@@ -251,7 +251,7 @@ function DeliveryDetailDialog({
           easily exceed viewport height. Without a cap the dialog grows past
           the screen edge and the bottom (e.g. Replay button) becomes
           unreachable. 85vh leaves breathing room around the dialog. */}
-      <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[85svh] overflow-y-auto">
         <DialogTitle className="flex items-center gap-2">
           <Webhook className="h-4 w-4 text-muted-foreground" />
           {t(($) => $.deliveries.detail.title)}
