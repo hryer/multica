@@ -1285,7 +1285,7 @@ export function manualDialogContentClass(isExpanded: boolean) {
     "!top-1/2 !left-1/2 !-translate-x-1/2",
     "!transition-all !duration-300 !ease-out",
     isExpanded
-      ? "!max-w-4xl !w-full !h-5/6 !-translate-y-1/2"
+      ? "!max-w-4xl !w-full !h-[83.3333svh] !-translate-y-1/2"
       : "!max-w-2xl !w-full !h-96 !-translate-y-1/2",
   );
 }

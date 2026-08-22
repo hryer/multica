@@ -31,6 +31,7 @@ import { propertyListOptions, useSetIssueProperty, useUnsetIssueProperty } from 
 import { useWorkspaceId } from "@multica/core/hooks";
 import type { IssueGrouping } from "@multica/core/issues/stores/view-store";
 import { useActorName } from "@multica/core/workspace/hooks";
+import { usePointerActivationConstraint } from "../../common/use-pointer-activation-constraint";
 import { BoardColumn, BOARD_CARD_WIDTH, type BoardColumnGroup } from "./board-column";
 import { BoardCardContent } from "./board-card";
 import { HiddenColumnsPanel, HiddenColumnRow } from "./hidden-columns-panel";
@@ -440,10 +441,9 @@ function BoardViewImpl({
     issueMapRef.current = issueMap;
   }
 
+  const activationConstraint = usePointerActivationConstraint();
   const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: { distance: 5 },
-    })
+    useSensor(PointerSensor, { activationConstraint })
   );
 
   const handleDragStart = useCallback(
@@ -609,7 +609,7 @@ function BoardViewImpl({
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <div className="flex flex-1 min-h-0 gap-4 overflow-x-auto p-2">
+      <div className="flex flex-1 min-h-0 gap-4 overflow-x-auto p-2 max-md:snap-x max-md:snap-mandatory [-webkit-overflow-scrolling:touch]">
         {groups.length === 0 ? (
           groupBranches?.isError ? (
             <button

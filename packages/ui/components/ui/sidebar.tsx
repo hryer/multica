@@ -68,10 +68,6 @@ function useSidebar() {
   return context
 }
 
-function useSidebarSafe() {
-  return React.use(SidebarContext)
-}
-
 function useSidebarResize() {
   const context = React.use(SidebarResizeContext)
   if (!context) {
@@ -647,8 +643,14 @@ const sidebarMenuButtonVariants = cva(
           "bg-background shadow-[0_0_0_1px_var(--color-sidebar-border)] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_var(--color-sidebar-accent)]",
       },
       size: {
-        default: "h-8 text-body",
-        sm: "h-7 text-caption",
+        // max-md: only — a stacked sidebar list has zero gap between rows
+        // (SidebarMenu is `gap-0`), so expanding the hit area via an
+        // absolutely-positioned pseudo-element would overlap neighboring
+        // rows instead of filling empty space. Growing the row itself is the
+        // only way to reach the ~40px touch target without that overlap, and
+        // it's gated to mobile so desktop density is untouched.
+        default: "h-8 text-body max-md:h-10",
+        sm: "h-7 text-caption max-md:h-10",
         lg: "h-12 text-body group-data-[collapsible=icon]:p-0!",
       },
     },
@@ -883,5 +885,4 @@ export {
   SidebarSeparator,
   SidebarTrigger,
   useSidebar,
-  useSidebarSafe,
 }

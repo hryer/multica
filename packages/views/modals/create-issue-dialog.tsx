@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import { cn } from "@multica/ui/lib/utils";
-import { Dialog, DialogContent } from "@multica/ui/components/ui/dialog";
+import {
+  ResponsiveDialog,
+  ResponsiveDialogContent,
+} from "@multica/ui/components/ui/responsive-dialog";
 import {
   useCreateModeStore,
   type CreateMode,
@@ -64,17 +67,18 @@ export function CreateIssueDialog({
           // — pasted screenshots still scroll inside instead of pushing the
           // dialog past the viewport.
           isExpanded
-            ? "!max-w-4xl !w-full !h-5/6"
+            ? "!max-w-4xl !w-full !h-[83.3333svh]"
             : "!max-w-xl !w-full !max-h-[80svh]",
         )
       : manualDialogContentClass(isExpanded);
 
   return (
-    <Dialog open disablePointerDismissal onOpenChange={(v) => { if (!v) onClose(); }}>
-      <DialogContent
+    <ResponsiveDialog open disablePointerDismissal onOpenChange={(v) => { if (!v) onClose(); }}>
+      <ResponsiveDialogContent
         finalFocus={false}
         showCloseButton={false}
         className={className}
+        drawerClassName="h-[85vh] flex flex-col overflow-hidden"
       >
         {mode === "agent" ? (
           <AgentCreatePanel
@@ -93,7 +97,7 @@ export function CreateIssueDialog({
             setIsExpanded={setIsExpanded}
           />
         )}
-      </DialogContent>
-    </Dialog>
+      </ResponsiveDialogContent>
+    </ResponsiveDialog>
   );
 }

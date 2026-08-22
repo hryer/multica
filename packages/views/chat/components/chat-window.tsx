@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { Minus, Maximize2, Minimize2, ChevronDown, Plus, Check, Archive, Pencil, Loader2, Square } from "lucide-react";
 import { Button } from "@multica/ui/components/ui/button";
 import { cn } from "@multica/ui/lib/utils";
+import { useIsMobile } from "@multica/ui/hooks/use-mobile";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@multica/ui/components/ui/tooltip";
 import {
   Popover,
@@ -751,6 +752,7 @@ export function ChatWindow() {
   }, [activeSessionId, pendingTaskId, setOpen]);
 
   const isExpanded = useChatStore((s) => s.isExpanded);
+  const isMobile = useIsMobile();
 
   const windowRef = useRef<HTMLDivElement>(null);
   const { renderWidth, renderHeight, isAtMax, boundsReady, isDragging, toggleExpand, startDrag } = useChatResize(windowRef);
@@ -763,10 +765,13 @@ export function ChatWindow() {
 
   // `@container`: the window is user-resizable from 360px to 90% of the
   // viewport, so the chat body's gutter (CHAT_GUTTER) has to key off the
-  // window's own width, not the page behind it.
-  const containerClass = "absolute bottom-2 right-2 z-50 flex flex-col overflow-hidden rounded-xl bg-surface-raised shadow-[var(--floating-shadow)] ring-1 ring-surface-border @container";
+  // window's own width, not the page behind it. On mobile the window is a
+  // full-screen panel instead — sized by `inset-0`, not by the resize hook.
+  const containerClass = isMobile
+    ? "absolute inset-0 z-50 flex flex-col overflow-hidden bg-surface-raised @container"
+    : "absolute bottom-2 right-2 z-50 flex flex-col overflow-hidden rounded-xl bg-surface-raised shadow-[var(--floating-shadow)] ring-1 ring-surface-border @container";
   const containerStyle: React.CSSProperties = {
-    transformOrigin: "bottom right",
+    transformOrigin: isMobile ? "center" : "bottom right",
     pointerEvents: isOpen ? "auto" : "none",
   };
 
@@ -777,21 +782,24 @@ export function ChatWindow() {
       ref={windowRef}
       className={containerClass}
       style={containerStyle}
-      initial={{ opacity: 0, scale: 0.95, width: renderWidth, height: renderHeight }}
+      initial={{ opacity: 0, scale: 0.95, ...(isMobile ? {} : { width: renderWidth, height: renderHeight }) }}
       animate={{
         opacity: isVisible ? 1 : 0,
         scale: isVisible ? 1 : 0.95,
-        width: renderWidth,
-        height: renderHeight,
+        ...(isMobile ? {} : { width: renderWidth, height: renderHeight }),
       }}
       transition={{
-        width: isDragging ? { duration: 0 } : { type: "spring", duration: 0.3, bounce: 0 },
-        height: isDragging ? { duration: 0 } : { type: "spring", duration: 0.3, bounce: 0 },
+        ...(isMobile
+          ? {}
+          : {
+              width: isDragging ? { duration: 0 } : { type: "spring", duration: 0.3, bounce: 0 },
+              height: isDragging ? { duration: 0 } : { type: "spring", duration: 0.3, bounce: 0 },
+            }),
         opacity: { duration: 0.15 },
         scale: { type: "spring", duration: 0.2, bounce: 0 },
       }}
     >
-      <ChatResizeHandles onDragStart={startDrag} />
+      {!isMobile && <ChatResizeHandles onDragStart={startDrag} />}
       {/* Header — ⊕ new + session dropdown | window tools */}
       <div className="flex items-center justify-between border-b px-4 py-2.5 gap-2">
         <div className="flex items-center gap-1 min-w-0">
@@ -820,23 +828,25 @@ export function ChatWindow() {
           />
         </div>
         <div className="flex items-center gap-0.5 shrink-0">
-          <Tooltip>
-            <TooltipTrigger
-              render={
-                <Button
-                  variant="ghost"
-                  size="icon-sm"
-                  className="text-muted-foreground"
-                  onClick={toggleExpand}
-                />
-              }
-            >
-              {isExpanded || isAtMax ? <Minimize2 /> : <Maximize2 />}
-            </TooltipTrigger>
-            <TooltipContent side="top">
-              {isExpanded || isAtMax ? t(($) => $.window.restore_tooltip) : t(($) => $.window.expand_tooltip)}
-            </TooltipContent>
-          </Tooltip>
+          {!isMobile && (
+            <Tooltip>
+              <TooltipTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    className="text-muted-foreground"
+                    onClick={toggleExpand}
+                  />
+                }
+              >
+                {isExpanded || isAtMax ? <Minimize2 /> : <Maximize2 />}
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                {isExpanded || isAtMax ? t(($) => $.window.restore_tooltip) : t(($) => $.window.expand_tooltip)}
+              </TooltipContent>
+            </Tooltip>
+          )}
           <Tooltip>
             <TooltipTrigger
               render={
@@ -1410,7 +1420,7 @@ function SessionDropdown({
             </div>
           ) : (
             <div className="flex shrink-0 items-center">
-              <div className="flex h-7 items-center justify-end gap-1.5 text-caption text-muted-foreground group-hover/history-row:hidden">
+              <div className="flex h-7 items-center justify-end gap-1.5 text-caption text-muted-foreground group-hover/history-row:hidden [@media(hover:none)]:hidden">
                 {isRunning && <Loader2 className="size-3 animate-spin" />}
                 {showCompleted && !isRunning && <Check className="size-3 text-emerald-500" />}
                 {showUnread && !isRunning && !showCompleted && (
@@ -1422,7 +1432,7 @@ function SessionDropdown({
                 )}
                 <span className={cn("truncate", (showUnread || showCompleted || isRunning) && "font-medium text-foreground")}>{trailingStatus}</span>
               </div>
-              <div className="hidden h-7 items-center gap-0.5 group-hover/history-row:flex">
+              <div className="hidden h-7 items-center gap-0.5 group-hover/history-row:flex [@media(hover:none)]:flex">
                 {isRunning && pendingTask && (
                   <button
                     type="button"

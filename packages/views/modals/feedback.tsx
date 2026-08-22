@@ -2,12 +2,12 @@
 
 import { useRef, useState } from "react";
 import { toast } from "sonner";
+import { DialogHeader } from "@multica/ui/components/ui/dialog";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+  ResponsiveDialog,
+  ResponsiveDialogContent,
+  ResponsiveDialogTitle,
+} from "@multica/ui/components/ui/responsive-dialog";
 import { Button } from "@multica/ui/components/ui/button";
 import { FileUploadButton } from "@multica/ui/components/common/file-upload-button";
 import {
@@ -126,10 +126,13 @@ export function FeedbackModal({
   };
 
   return (
-    <Dialog open disablePointerDismissal onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="sm:max-w-2xl !h-[28rem] p-0 gap-0 flex flex-col overflow-hidden">
+    <ResponsiveDialog open disablePointerDismissal onOpenChange={(v) => !v && onClose()}>
+      <ResponsiveDialogContent
+        className="sm:max-w-2xl !h-[28rem] p-0 gap-0 flex flex-col overflow-hidden"
+        drawerClassName="h-[85vh] flex flex-col overflow-hidden"
+      >
         <DialogHeader className="px-5 pt-4 pb-2 shrink-0">
-          <DialogTitle>{t(($) => $.feedback.title)}</DialogTitle>
+          <ResponsiveDialogTitle>{t(($) => $.feedback.title)}</ResponsiveDialogTitle>
           <p className="mt-1 text-caption text-muted-foreground">
             {t(($) => $.feedback.github_hint_prefix)}
             <a
@@ -192,7 +195,7 @@ export function FeedbackModal({
             ) : null}
           </Button>
         </div>
-      </DialogContent>
-    </Dialog>
+      </ResponsiveDialogContent>
+    </ResponsiveDialog>
   );
 }
