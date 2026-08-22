@@ -64,8 +64,8 @@ export function CreateIssueDialog({
           // — pasted screenshots still scroll inside instead of pushing the
           // dialog past the viewport.
           isExpanded
-            ? "!max-w-4xl !w-full !h-5/6"
-            : "!max-w-xl !w-full !max-h-[80vh]",
+            ? "!max-w-4xl !w-full !h-[83.3333svh]"
+            : "!max-w-xl !w-full !max-h-[80svh]",
         )
       : manualDialogContentClass(isExpanded);
 

@@ -449,8 +449,8 @@ export function CreateSkillDialog({
           "flex flex-col gap-0 overflow-hidden p-0",
           "!transition-all !duration-300 !ease-out",
           wide
-            ? "!h-[min(600px,85vh)] !max-w-2xl !w-full"
-            : "!h-auto !max-h-[85vh] !max-w-md !w-full",
+            ? "!h-[min(600px,85svh)] !max-w-2xl !w-full"
+            : "!h-auto !max-h-[85svh] !max-w-md !w-full",
         )}
       >
         {/* Header */}
