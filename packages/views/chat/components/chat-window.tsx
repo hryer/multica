@@ -1420,7 +1420,7 @@ function SessionDropdown({
             </div>
           ) : (
             <div className="flex shrink-0 items-center">
-              <div className="flex h-7 items-center justify-end gap-1.5 text-caption text-muted-foreground group-hover/history-row:hidden">
+              <div className="flex h-7 items-center justify-end gap-1.5 text-caption text-muted-foreground group-hover/history-row:hidden [@media(hover:none)]:hidden">
                 {isRunning && <Loader2 className="size-3 animate-spin" />}
                 {showCompleted && !isRunning && <Check className="size-3 text-emerald-500" />}
                 {showUnread && !isRunning && !showCompleted && (
@@ -1432,7 +1432,7 @@ function SessionDropdown({
                 )}
                 <span className={cn("truncate", (showUnread || showCompleted || isRunning) && "font-medium text-foreground")}>{trailingStatus}</span>
               </div>
-              <div className="hidden h-7 items-center gap-0.5 group-hover/history-row:flex">
+              <div className="hidden h-7 items-center gap-0.5 group-hover/history-row:flex [@media(hover:none)]:flex">
                 {isRunning && pendingTask && (
                   <button
                     type="button"

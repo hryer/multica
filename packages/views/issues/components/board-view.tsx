@@ -609,7 +609,7 @@ function BoardViewImpl({
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <div className="flex flex-1 min-h-0 gap-4 overflow-x-auto p-2">
+      <div className="flex flex-1 min-h-0 gap-4 overflow-x-auto p-2 max-md:snap-x max-md:snap-mandatory [-webkit-overflow-scrolling:touch]">
         {groups.length === 0 ? (
           groupBranches?.isError ? (
             <button
