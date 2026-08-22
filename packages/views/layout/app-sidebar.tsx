@@ -81,6 +81,7 @@ import {
 } from "@multica/core/shortcuts";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
 import { useAppForeground } from "../common/use-app-foreground";
+import { usePointerActivationConstraint } from "../common/use-pointer-activation-constraint";
 
 // Top-level nav items stay active when the user is on a child route
 // (e.g. "Projects" stays lit on /:slug/projects/:id). Pinned items keep
@@ -419,7 +420,8 @@ export function AppSidebar({ topSlot, searchSlot, headerClassName, headerStyle }
   });
   const deletePin = useDeletePin();
   const reorderPins = useReorderPins();
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
+  const activationConstraint = usePointerActivationConstraint();
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint }));
   const sidebarScrollRef = useRef<HTMLDivElement>(null);
   const sidebarFadeStyle = useScrollFade(sidebarScrollRef, 24);
   const getPinHref = useCallback(

@@ -45,6 +45,7 @@ import type {
 } from "../surface/use-issue-status-branches";
 import { VirtuosoSeed, VIRTUOSO_SEED_COUNT } from "../../common/virtuoso-seed";
 import { DeferredTooltip } from "../../common/deferred-tooltip";
+import { usePointerActivationConstraint } from "../../common/use-pointer-activation-constraint";
 import { useRestoredScrollRef } from "../../platform";
 
 // List rows are a fixed 36px (h-9). Sharing the estimate between the seed's
@@ -159,10 +160,9 @@ function ListViewImpl({
     [groupIds],
   );
 
+  const activationConstraint = usePointerActivationConstraint();
   const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: { distance: 5 },
-    })
+    useSensor(PointerSensor, { activationConstraint })
   );
 
   const handleDragStart = useCallback(
