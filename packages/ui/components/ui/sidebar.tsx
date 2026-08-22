@@ -68,10 +68,6 @@ function useSidebar() {
   return context
 }
 
-function useSidebarSafe() {
-  return React.use(SidebarContext)
-}
-
 function useSidebarResize() {
   const context = React.use(SidebarResizeContext)
   if (!context) {
@@ -883,5 +879,4 @@ export {
   SidebarSeparator,
   SidebarTrigger,
   useSidebar,
-  useSidebarSafe,
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { SidebarProvider, SidebarInset } from "@multica/ui/components/ui/sidebar";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@multica/ui/components/ui/sidebar";
 import { ModalRegistry } from "../modals/registry";
 import { SourceBackfillModal } from "../onboarding";
 import { AppSidebar } from "./app-sidebar";
@@ -40,6 +40,13 @@ export function DashboardLayout({
         <AppSidebar searchSlot={searchSlot} />
         <SidebarInset className="relative overflow-hidden">
           <NavigationProgress />
+          {/* Mobile-only, always mounted: pages render wildly different headers
+              (or none while loading), so this is the one place every page is
+              guaranteed to expose a way back to the sidebar. Lives in normal
+              flow, not floating, so it never overlaps page content. */}
+          <div className="flex h-12 shrink-0 items-center border-b px-4 md:hidden">
+            <SidebarTrigger className="size-10" />
+          </div>
           {children}
           <ModalRegistry />
           <SourceBackfillModal />
