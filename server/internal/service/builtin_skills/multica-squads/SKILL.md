@@ -83,9 +83,12 @@ Issue/comment commands often needed with squads:
 ```bash
 multica issue get <issue-id> --output json
 multica issue update <issue-id> --help
-multica issue comment list <issue-id> --output json
+multica issue comment list <issue-id> --roots-only --summary --output json
 multica issue comment add <issue-id> --help
 ```
+
+Comment reads stay bounded — the scan-then-expand sequence from the quick
+start above — never one unbounded `issue comment list` pull.
 
 Prefer `--output json` for reads. Use `--help` before writes.
 
@@ -176,6 +179,10 @@ Current behavior:
   leader path, including an `@squad` mention on an issue owned by a plain agent
   — on those paths the protocol instead carries an explicit "do not change this
   issue's status".
+
+The status names above are category rules: a workspace may define custom
+statuses beyond the built-ins, and each one inherits its category's behavior in
+full (the runtime brief lists the workspace catalog when any exist).
 
 Assignment validation rejects a missing type/id pair, non-existent squad,
 archived squad, archived leader, and private leader when the actor cannot access
