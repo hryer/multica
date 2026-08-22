@@ -442,7 +442,7 @@ export function CreateSkillDialog({
   const wide = method === "runtime";
 
   return (
-    <Dialog open onOpenChange={(v) => !v && onClose()}>
+    <Dialog open disablePointerDismissal onOpenChange={(v) => !v && onClose()}>
       <DialogContent
         showCloseButton={false}
         className={cn(

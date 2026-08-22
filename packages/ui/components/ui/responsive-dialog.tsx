@@ -19,9 +19,14 @@ function ResponsiveDialog({
   children,
   open,
   onOpenChange,
+  disablePointerDismissal,
 }: {
   open?: boolean
   onOpenChange?: (open: boolean) => void
+  // Desktop only: the Drawer keeps its swipe/backdrop dismissal — a bottom
+  // sheet's backdrop sits above the sheet, so a stray touch can't land on it
+  // the way a stray click lands beside a centered dialog.
+  disablePointerDismissal?: boolean
   children: React.ReactNode
 }) {
   const isMobile = useIsMobile()
@@ -32,7 +37,11 @@ function ResponsiveDialog({
           {children}
         </Drawer>
       ) : (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog
+          open={open}
+          onOpenChange={onOpenChange}
+          disablePointerDismissal={disablePointerDismissal}
+        >
           {children}
         </Dialog>
       )}

@@ -24,6 +24,7 @@ export function CreateWorkspaceModal({ onClose }: { onClose: () => void }) {
   return (
     <Dialog
       open
+      disablePointerDismissal
       onOpenChange={(v) => {
         if (!v) onClose();
       }}

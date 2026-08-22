@@ -126,7 +126,7 @@ export function FeedbackModal({
   };
 
   return (
-    <ResponsiveDialog open onOpenChange={(v) => !v && onClose()}>
+    <ResponsiveDialog open disablePointerDismissal onOpenChange={(v) => !v && onClose()}>
       <ResponsiveDialogContent
         className="sm:max-w-2xl !h-[28rem] p-0 gap-0 flex flex-col overflow-hidden"
         drawerClassName="h-[85vh] flex flex-col overflow-hidden"

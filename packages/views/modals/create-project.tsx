@@ -293,7 +293,7 @@ export function CreateProjectModal({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <ResponsiveDialog open onOpenChange={(v) => { if (!v) onClose(); }}>
+    <ResponsiveDialog open disablePointerDismissal onOpenChange={(v) => { if (!v) onClose(); }}>
       <ResponsiveDialogContent
         showCloseButton={false}
         className={cn(

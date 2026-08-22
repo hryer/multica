@@ -1301,7 +1301,7 @@ export function CreateIssueModal(props: {
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   return (
-    <DialogRoot open onOpenChange={(v) => { if (!v) props.onClose(); }}>
+    <DialogRoot open disablePointerDismissal onOpenChange={(v) => { if (!v) props.onClose(); }}>
       <DialogContent
         finalFocus={false}
         showCloseButton={false}

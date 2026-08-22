@@ -73,7 +73,7 @@ export function CreateIssueDialog({
       : manualDialogContentClass(isExpanded);
 
   return (
-    <ResponsiveDialog open onOpenChange={(v) => { if (!v) onClose(); }}>
+    <ResponsiveDialog open disablePointerDismissal onOpenChange={(v) => { if (!v) onClose(); }}>
       <ResponsiveDialogContent
         finalFocus={false}
         showCloseButton={false}
