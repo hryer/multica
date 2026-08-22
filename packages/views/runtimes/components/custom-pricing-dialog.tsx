@@ -132,7 +132,7 @@ export function CustomPricingDialog({ open, onOpenChange, unmappedModels }: Prop
           </DialogDescription>
         </DialogHeader>
 
-        <div className="max-h-[60vh] space-y-4 overflow-y-auto">
+        <div className="max-h-[60svh] space-y-4 overflow-y-auto">
           {rows.length === 0 ? (
             <p className="py-4 text-center text-caption text-muted-foreground">
               {t(($) => $.usage.custom_pricing.empty)}

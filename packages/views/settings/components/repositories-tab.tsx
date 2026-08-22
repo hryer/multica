@@ -481,7 +481,7 @@ export function RepositoriesTab() {
           if (!open) closeGitHubPicker();
         }}
       >
-        <DialogContent className="flex max-h-[85vh] flex-col gap-0 p-0 sm:max-w-2xl">
+        <DialogContent className="flex max-h-[85svh] flex-col gap-0 p-0 sm:max-w-2xl">
           <DialogHeader className="border-b px-6 py-5">
             <DialogTitle>
               {t(($) => $.repositories.github_picker_title)}

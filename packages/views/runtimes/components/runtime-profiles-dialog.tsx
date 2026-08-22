@@ -111,7 +111,7 @@ export function RuntimeProfilesDialog({
     <Dialog open onOpenChange={(open) => !open && onClose()}>
       <DialogContent
         className={cn(
-          "flex max-h-[88vh] flex-col gap-0 overscroll-contain p-0",
+          "flex max-h-[88svh] flex-col gap-0 overscroll-contain p-0",
           intent === "manage" ? "sm:max-w-3xl" : "sm:max-w-2xl",
         )}
         showCloseButton={false}

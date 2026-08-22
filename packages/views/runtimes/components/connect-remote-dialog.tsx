@@ -105,7 +105,7 @@ export function ConnectRemoteDialog({ onClose }: { onClose: () => void }) {
 
   return (
     <Dialog open onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="flex max-h-[85vh] flex-col gap-0 p-0 sm:max-w-lg">
+      <DialogContent className="flex max-h-[85svh] flex-col gap-0 p-0 sm:max-w-lg">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={step}

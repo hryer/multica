@@ -329,7 +329,7 @@ function CliInstallDialog({
   const { t } = useT("onboarding");
   return (
     <Dialog open={open} onOpenChange={(o) => (o ? null : onClose())}>
-      <DialogContent className="flex max-h-[85vh] flex-col sm:max-w-[560px]">
+      <DialogContent className="flex max-h-[85svh] flex-col sm:max-w-[560px]">
         <DialogHeader>
           <DialogTitle>{t(($) => $.step_platform.cli_dialog_title)}</DialogTitle>
           <DialogDescription>
