@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import { cn } from "@multica/ui/lib/utils";
-import { Dialog, DialogContent } from "@multica/ui/components/ui/dialog";
+import {
+  ResponsiveDialog,
+  ResponsiveDialogContent,
+} from "@multica/ui/components/ui/responsive-dialog";
 import {
   useCreateModeStore,
   type CreateMode,
@@ -70,11 +73,12 @@ export function CreateIssueDialog({
       : manualDialogContentClass(isExpanded);
 
   return (
-    <Dialog open onOpenChange={(v) => { if (!v) onClose(); }}>
-      <DialogContent
+    <ResponsiveDialog open onOpenChange={(v) => { if (!v) onClose(); }}>
+      <ResponsiveDialogContent
         finalFocus={false}
         showCloseButton={false}
         className={className}
+        drawerClassName="h-[85vh] flex flex-col overflow-hidden"
       >
         {mode === "agent" ? (
           <AgentCreatePanel
@@ -93,7 +97,7 @@ export function CreateIssueDialog({
             setIsExpanded={setIsExpanded}
           />
         )}
-      </DialogContent>
-    </Dialog>
+      </ResponsiveDialogContent>
+    </ResponsiveDialog>
   );
 }

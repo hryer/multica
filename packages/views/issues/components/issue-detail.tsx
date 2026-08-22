@@ -662,7 +662,7 @@ function SubIssueRow({
                 "transition-opacity",
                 selected
                   ? "opacity-0"
-                  : "group-hover/row:opacity-0 group-focus-within/row:opacity-0",
+                  : "group-hover/row:opacity-0 group-focus-within/row:opacity-0 [@media(hover:none)]:opacity-0",
               )}
             />
           )}
@@ -675,7 +675,7 @@ function SubIssueRow({
               "absolute inset-0 cursor-pointer accent-primary transition-opacity",
               selected
                 ? "opacity-100"
-                : "opacity-0 group-hover/row:opacity-100 focus-visible:opacity-100",
+                : "opacity-0 group-hover/row:opacity-100 focus-visible:opacity-100 [@media(hover:none)]:opacity-100",
             )}
           />
         </div>
@@ -2046,7 +2046,7 @@ export function IssueDetail({ issueId, onDelete, onDone, defaultSidebarOpen = tr
                 title={t(($) => $.actions.remove_parent_issue)}
                 aria-label={t(($) => $.actions.remove_parent_issue)}
                 onClick={() => actions.removeParent()}
-                className="shrink-0 rounded p-1 text-muted-foreground opacity-0 transition-opacity hover:bg-accent hover:text-foreground focus-visible:opacity-100 group-hover:opacity-100"
+                className="relative shrink-0 rounded p-1 text-muted-foreground opacity-0 transition-opacity after:absolute after:-inset-1.5 hover:bg-accent hover:text-foreground focus-visible:opacity-100 group-hover:opacity-100 [@media(hover:none)]:opacity-100 md:after:hidden"
               >
                 <Unlink className="h-3.5 w-3.5" />
               </button>
@@ -2558,7 +2558,7 @@ export function IssueDetail({ issueId, onDelete, onDone, defaultSidebarOpen = tr
                       "ml-1 cursor-pointer accent-primary transition-opacity",
                       someChildrenSelected
                         ? "opacity-100"
-                        : "opacity-0 group-hover/sub-issues:opacity-100 focus-visible:opacity-100",
+                        : "opacity-0 group-hover/sub-issues:opacity-100 focus-visible:opacity-100 [@media(hover:none)]:opacity-100",
                     )}
                   />
                   <div className="ml-auto flex items-center gap-0.5">

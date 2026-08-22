@@ -173,7 +173,10 @@ export const BoardColumn = memo(function BoardColumn({
   );
 
   return (
-    <div style={{ width: BOARD_COL_WIDTH }} className={`flex shrink-0 flex-col rounded-xl ${cfg?.columnBg ?? "bg-muted/40"} p-2`}>
+    <div
+      style={{ width: `min(${BOARD_COL_WIDTH}px, calc(100vw - 2rem))` }}
+      className={`flex shrink-0 flex-col rounded-xl max-md:snap-center ${cfg?.columnBg ?? "bg-muted/40"} p-2`}
+    >
       <div className="mb-2 flex items-center justify-between px-1.5">
         <BoardGroupHeading group={group} count={totalCount ?? issueIds.length} />
 

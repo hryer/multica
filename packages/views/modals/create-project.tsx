@@ -36,7 +36,11 @@ import { useActorName } from "@multica/core/workspace/hooks";
 import type { ProjectStatus, ProjectPriority } from "@multica/core/types";
 import { cn } from "@multica/ui/lib/utils";
 import { toast } from "sonner";
-import { Dialog, DialogContent, DialogTitle } from "@multica/ui/components/ui/dialog";
+import {
+  ResponsiveDialog,
+  ResponsiveDialogContent,
+  ResponsiveDialogTitle,
+} from "@multica/ui/components/ui/responsive-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -289,8 +293,8 @@ export function CreateProjectModal({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <Dialog open onOpenChange={(v) => { if (!v) onClose(); }}>
-      <DialogContent
+    <ResponsiveDialog open onOpenChange={(v) => { if (!v) onClose(); }}>
+      <ResponsiveDialogContent
         showCloseButton={false}
         className={cn(
           "p-0 gap-0 flex flex-col overflow-hidden",
@@ -300,8 +304,9 @@ export function CreateProjectModal({ onClose }: { onClose: () => void }) {
             ? "!max-w-4xl !w-full !h-5/6 !-translate-y-1/2"
             : "!max-w-2xl !w-full !h-96 !-translate-y-1/2",
         )}
+        drawerClassName="h-[85vh] flex flex-col overflow-hidden"
       >
-        <DialogTitle className="sr-only">{t(($) => $.create_project.title)}</DialogTitle>
+        <ResponsiveDialogTitle className="sr-only">{t(($) => $.create_project.title)}</ResponsiveDialogTitle>
 
         <div className="flex items-center justify-between px-5 pt-3 pb-2 shrink-0">
           <div className="flex items-center gap-1.5 text-caption">
@@ -844,7 +849,7 @@ export function CreateProjectModal({ onClose }: { onClose: () => void }) {
             {submitting ? t(($) => $.create_project.submitting) : t(($) => $.create_project.submit)}
           </Button>
         </div>
-      </DialogContent>
-    </Dialog>
+      </ResponsiveDialogContent>
+    </ResponsiveDialog>
   );
 }
