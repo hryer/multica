@@ -30,6 +30,7 @@ import { propertyListOptions, useSetIssueProperty, useUnsetIssueProperty } from 
 import { useWorkspaceId } from "@multica/core/hooks";
 import type { IssueGrouping } from "@multica/core/issues/stores/view-store";
 import { useActorName } from "@multica/core/workspace/hooks";
+import { usePointerActivationConstraint } from "../../common/use-pointer-activation-constraint";
 import { BoardColumn, BOARD_CARD_WIDTH, type BoardColumnGroup } from "./board-column";
 import { BoardCardContent } from "./board-card";
 import { HiddenColumnsPanel, HiddenColumnRow } from "./hidden-columns-panel";
@@ -508,10 +509,9 @@ function BoardViewImpl({
     issueMapRef.current = issueMap;
   }
 
+  const activationConstraint = usePointerActivationConstraint();
   const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: { distance: 5 },
-    })
+    useSensor(PointerSensor, { activationConstraint })
   );
 
   // Side peek steps through a column with J / K, in the order shown here.
@@ -723,6 +723,9 @@ function BoardViewImpl({
           // While a side peek is open, a trailing spacer as wide as the panel
           // lets every column scroll clear of it (IssuePeekHost).
           "group-data-[peek-open]/peek:after:w-(--issue-peek-width) group-data-[peek-open]/peek:after:shrink-0 group-data-[peek-open]/peek:after:content-['']",
+          // Narrow viewports snap column-to-column, so a swipe settles on a
+          // column edge rather than mid-gutter, and keeps iOS momentum scroll.
+          "max-md:snap-x max-md:snap-mandatory [-webkit-overflow-scrolling:touch]",
         )}
       >
         {groups.length === 0 ? (

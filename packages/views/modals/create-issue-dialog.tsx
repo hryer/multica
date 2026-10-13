@@ -3,7 +3,10 @@
 import { useLayoutEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { cn } from "@multica/ui/lib/utils";
-import { Dialog, DialogContent } from "@multica/ui/components/ui/dialog";
+import {
+  ResponsiveDialog,
+  ResponsiveDialogContent,
+} from "@multica/ui/components/ui/responsive-dialog";
 import {
   useCreateModeStore,
   type CreateMode,
@@ -164,11 +167,12 @@ function CreateIssueDialogBody({
         );
 
   return (
-    <Dialog open onOpenChange={(v) => { if (!v) onClose(); }}>
-      <DialogContent
+    <ResponsiveDialog open disablePointerDismissal onOpenChange={(v) => { if (!v) onClose(); }}>
+      <ResponsiveDialogContent
         finalFocus={false}
         showCloseButton={false}
         className={className}
+        drawerClassName="h-[85vh] flex flex-col overflow-hidden"
       >
         {mode === "agent" ? (
           <AgentCreatePanel
@@ -187,7 +191,7 @@ function CreateIssueDialogBody({
             setIsExpanded={setIsExpanded}
           />
         )}
-      </DialogContent>
-    </Dialog>
+      </ResponsiveDialogContent>
+    </ResponsiveDialog>
   );
 }

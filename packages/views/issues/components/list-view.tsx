@@ -49,6 +49,7 @@ import type {
 } from "../surface/use-issue-status-branches";
 import { VirtuosoSeed, VIRTUOSO_SEED_COUNT } from "../../common/virtuoso-seed";
 import { DeferredTooltip } from "../../common/deferred-tooltip";
+import { usePointerActivationConstraint } from "../../common/use-pointer-activation-constraint";
 import { useRestoredScrollRef } from "../../platform";
 import { HiddenColumnsPanel, HiddenColumnRow } from "./hidden-columns-panel";
 import { toast } from "sonner";
@@ -180,10 +181,9 @@ function ListViewImpl({
     [groupIds],
   );
 
+  const activationConstraint = usePointerActivationConstraint();
   const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: { distance: 5 },
-    })
+    useSensor(PointerSensor, { activationConstraint })
   );
 
   const handleDragStart = useCallback(

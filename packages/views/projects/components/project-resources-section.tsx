@@ -686,7 +686,7 @@ function ResourceRow({
           <button
             type="button"
             onClick={() => onEditGithubRef(resource)}
-            className="opacity-0 group-hover:opacity-100 transition-opacity rounded-sm p-0.5 hover:bg-accent"
+            className="opacity-0 group-hover:opacity-100 transition-opacity rounded-sm p-0.5 hover:bg-accent [@media(hover:none)]:opacity-100"
             title={t(($) => $.resources.ref_edit_tooltip)}
           >
             <GitBranch className="size-3 text-muted-foreground" />
@@ -694,7 +694,7 @@ function ResourceRow({
           <button
             type="button"
             onClick={onRemove}
-            className="opacity-0 group-hover:opacity-100 transition-opacity rounded-sm p-0.5 hover:bg-accent"
+            className="opacity-0 group-hover:opacity-100 transition-opacity rounded-sm p-0.5 hover:bg-accent [@media(hover:none)]:opacity-100"
             title={t(($) => $.resources.remove_tooltip)}
           >
             <Trash2 className="size-3 text-muted-foreground" />
@@ -839,7 +839,7 @@ function LocalDirectoryRow({
       <button
         type="button"
         onClick={() => onEditMode(resource)}
-        className="opacity-0 group-hover:opacity-100 transition-opacity rounded-sm p-0.5 hover:bg-accent"
+        className="opacity-0 group-hover:opacity-100 transition-opacity rounded-sm p-0.5 hover:bg-accent [@media(hover:none)]:opacity-100"
         title={t(($) => $.resources.mode_edit_tooltip)}
       >
         <GitBranch className="size-3 text-muted-foreground" />
@@ -847,7 +847,7 @@ function LocalDirectoryRow({
       <button
         type="button"
         onClick={onRemove}
-        className="opacity-0 group-hover:opacity-100 transition-opacity rounded-sm p-0.5 hover:bg-accent"
+        className="opacity-0 group-hover:opacity-100 transition-opacity rounded-sm p-0.5 hover:bg-accent [@media(hover:none)]:opacity-100"
         title={t(($) => $.resources.remove_tooltip)}
       >
         <Trash2 className="size-3 text-muted-foreground" />
